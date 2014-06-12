@@ -33,14 +33,9 @@ class ImportPresenter extends BasePresenter
 			$posts = $response->getGraphObject()->asArray();
 
 			$data = $posts['data'];
-		} catch (FacebookRequestException $ex) {
-			// Session not valid, Graph API returned an exception with the reason.
-			echo $ex->getMessage();
-			exit();
 		} catch (\Exception $ex) {
-			// Graph API returned info, but it may mismatch the current app or have expired.
-			echo $ex->getMessage();
-			exit();
+			throw $ex;
+			$this->terminate();
 		}
 
 		Dumper::dump($data);
