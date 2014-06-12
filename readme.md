@@ -8,9 +8,9 @@ Status: dirty version
 
 TODO
 --------
-[ ] load post from facebook wall 
-[ ] use cache
-[ ] save to database
-[ ] show specific posts
-[ ] refactoring - use model and DI
-[ ] use Kdyby\Facebook
+- [ ] load post from facebook wall
+- [ ] use cache
+- [ ] save to database
+- [ ] show specific posts
+- [ ] refactoring - use model and DI
+- [ ] use Kdyby\Facebook
