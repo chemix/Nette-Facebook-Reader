@@ -1,7 +1,7 @@
 {
-	"name": "nette/sandbox",
-	"description": "The sandbox is a pre-packaged Nette Framework project, basic configured structure for your application.",
-	"homepage": "http://nette.org",
+	"name": "chemix/Nette-Facebook-Reader",
+	"description": "Simple php application for reading wall posts from Facebook",
+	"homepage": "http://github.com/chemix/Nette-Facebook-Reader",
 	"type": "project",
 	"license": ["BSD-3-Clause", "GPL-2.0", "GPL-3.0"],
 	"authors": [
@@ -12,12 +12,18 @@
 		{
 			"name": "Nette Community",
 			"homepage": "http://nette.org/contributors"
+		},
+		{
+			"name": "Honza Cerny",
+			"homepage": "http://honzacerny.com"
 		}
+
 	],
 	"require": {
 		"php": ">= 5.3.7",
 		"nette/nette": "~2.2.0",
-		"dg/adminer-custom": "~1.0"
+		"dg/adminer-custom": "~1.0",
+		"facebook/php-sdk-v4" : "4.0.*"
 	},
 	"require-dev": {
 		"nette/tester": "~1.0"
