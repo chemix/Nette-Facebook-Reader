@@ -104,6 +104,9 @@ class ImportPresenter extends BasePresenter
 				}
 			}
 		}
+
+		// send data to template
+		$this->template->wallPosts = $data;
 	}
 
 }
