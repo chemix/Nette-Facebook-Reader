@@ -1,3 +1,23 @@
 {block content}
 <h1>Facebook wall</h1>
 <a n:href="Import:default">Import</a>
+
+<div n:if="$wallPosts" class="facebook-posts">
+	<div n:foreach="$wallPosts as $post" class="post {$post->type}">
+		<h3 n:if="$post->name">{$post->name}</h3>
+		<img n:if="$post->picture" src="{$post->picture}" />
+
+		{if $post->message}
+			<p>
+				{$post->message|truncate:250:'...'}
+				<a n:if="$post->link" href="{$post->link}">více</a>
+			</p>
+		{else}
+			{if $post->link}
+				<a href="{$post->link}">více</a>
+			{else}
+				<a href="http://www.facebook.com/nettefw">více</a>
+			{/if}
+		{/if}
+	</div>
+</div>
