@@ -9,7 +9,6 @@ namespace App\Model;
 use Nette\Database\Context;
 use Nette\Object;
 use Facebook\FacebookRequest;
-use Facebook\FacebookSession;
 
 class FacebookWallposts extends Object
 {
@@ -19,9 +18,19 @@ class FacebookWallposts extends Object
 	 */
 	protected $database;
 
-	function __construct(Context $database)
+	/**
+	 * @var \App\Model\FacebookSessionManager
+	 */
+	protected $facebookSessionManager;
+
+	/**
+	 * @param Context $database
+	 * @param FacebookSessionManager $facebook
+	 */
+	function __construct(Context $database, FacebookSessionManager $facebook)
 	{
 		$this->database = $database;
+		$this->facebookSessionManager = $facebook;
 	}
 
 	public function getLastPosts($count = 5)
@@ -35,9 +44,7 @@ class FacebookWallposts extends Object
 
 	public function importPostFromFacebook()
 	{
-		FacebookSession::setDefaultApplication('YOUR_APP_ID', 'YOUR_APP_SECRET');
-
-		$session = FacebookSession::newAppSession();
+		$session = $this->facebookSessionManager->getAppSession();
 
 		try {
 			$request = new FacebookRequest($session, 'GET', '/nettefw/feed');

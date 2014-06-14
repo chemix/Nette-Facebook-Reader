@@ -26,3 +26,4 @@ services:
 	- App\RouterFactory
 	router: @App\RouterFactory::createRouter
 	- App\Model\FacebookWallposts
+	- App\Model\FacebookSessionManager(%facebook.appId%, %facebook.appSecret%)
