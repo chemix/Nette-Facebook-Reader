@@ -13,14 +13,13 @@ class HomepagePresenter extends BasePresenter
 {
 
 	/**
-	 * @var \Nette\Database\Context @inject
+	 * @var \App\Model\FacebookWallposts @inject
 	 */
-	public $database;
+	public $wallposts;
 
 	public function renderDefault()
 	{
-		$facebookWallPosts = $this->database->table('facebook_wallposts')->where('status','1')->limit(5)->fetchAll();
-		$this->template->wallPosts =  $facebookWallPosts;
+		$this->template->wallPosts = $this->wallposts->getLastPosts();
 	}
 
 }
