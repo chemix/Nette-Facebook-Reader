@@ -12,6 +12,6 @@ TODO
 - [x] load post from facebook wall
 - [x] use cache
 - [x] save to database
-- [ ] show specific posts
-- [ ] refactoring - use model and DI
+- [x] show specific posts
+- [x] refactoring - use model and DI
 - [ ] use Kdyby\Facebook
