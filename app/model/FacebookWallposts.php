@@ -6,9 +6,15 @@
 namespace App\Model;
 
 
+use Kdyby\Facebook\Facebook;
+use Kdyby\Facebook\FacebookApiException;
 use Nette\Database\Context;
 use Nette\Object;
-use Facebook\FacebookRequest;
+use Nette\Utils\ArrayHash;
+use Nette\Utils\DateTime;
+use Tracy\Debugger;
+
+
 
 class FacebookWallposts extends Object
 {
@@ -19,18 +25,16 @@ class FacebookWallposts extends Object
 	protected $database;
 
 	/**
-	 * @var \App\Model\FacebookSessionManager
+	 * @var Facebook
 	 */
-	protected $facebookSessionManager;
+	protected $facebook;
 
-	/**
-	 * @param Context $database
-	 * @param FacebookSessionManager $facebook
-	 */
-	function __construct(Context $database, FacebookSessionManager $facebook)
+
+
+	public function __construct(Context $database, Facebook $facebook)
 	{
 		$this->database = $database;
-		$this->facebookSessionManager = $facebook;
+		$this->facebook = $facebook;
 	}
 
 	public function getLastPosts($count = 5)
@@ -44,68 +48,51 @@ class FacebookWallposts extends Object
 
 	public function importPostFromFacebook()
 	{
-		$session = $this->facebookSessionManager->getAppSession();
-
 		try {
-			$request = new FacebookRequest($session, 'GET', '/nettefw/feed');
-			$response = $request->execute();
-			$posts = $response->getGraphObject()->asArray();
-			$data = $posts['data'];
+			// when you're loading a lot of posts, it's better to use ->iterate() instead of several ->get()'s
+			$posts = $this->facebook->iterate('/nettefw/feed');
 
-		} catch (\Exception $ex) {
-			throw $ex;
-			$this->terminate();
+		} catch (FacebookApiException $ex) {
+			Debugger::log($ex->getMessage(), 'facebook');
+			return array();
 		}
+
+		$imported = array();
 
 		// save data to database
-		if (is_array($data) && !empty($data)) {
-			foreach ($data as $rowPost) {
+		foreach ($posts as $rowPost) {
+			$post = array(
+				'id' => $rowPost->id,
+				'type' => $rowPost->type,
+				'created_time' => DateTime::from($rowPost->created_time)->format('Y-m-d H:i:s'),
+				'updated_time' => DateTime::from($rowPost->updated_time)->format('Y-m-d H:i:s'),
+				'name' => isset($rowPost->name) ? $rowPost->name : NULL,
+				'link' => isset($rowPost->link) ? $rowPost->link : NULL,
+				'status_type' => isset($rowPost->status_type) ? $rowPost->status_type : NULL,
+				'message' => isset($rowPost->message) ? $rowPost->message : NULL,
+				'caption' => isset($rowPost->caption) ? $rowPost->caption : NULL,
+				'picture' => isset($rowPost->picture) ? $rowPost->picture : NULL,
+			);
 
-				$post = array(
-					'id' => $rowPost->id,
-					'type' => $rowPost->type,
-					'created_time' => $rowPost->created_time,
-					'updated_time' => $rowPost->updated_time,
-				);
+			// post 'status' use story, we need message
+			if ($rowPost->type == 'status' && isset($rowPost->story)) {
+				$post['message'] = $rowPost->story;
+			}
 
-				if (isset($rowPost->name)) {
-					$post['name'] = $rowPost->name;
-				}
-				if (isset($rowPost->link)) {
-					$post['link'] = $rowPost->link;
-				}
-				if (isset($rowPost->status_type)) {
-					$post['status_type'] = $rowPost->status_type;
-				}
-				if (isset($rowPost->message)) {
-					$post['message'] = $rowPost->message;
-				}
-				if (isset($rowPost->caption)) {
-					$post['caption'] = $rowPost->caption;
-				}
-				if (isset($rowPost->picture)) {
-					$post['picture'] = $rowPost->picture;
-				}
-
-				// post 'status' use story, we need message
-				if ($rowPost->type == 'status') {
-					if (isset($rowPost->story)) {
-						$post['message'] = $rowPost->story;
-					}
-				}
-
-				try {
-					$this->database->table('facebook_wallposts')->insert($post);
-				} catch (\PDOException $e) {
-					if ($e->getCode() == '23000') {
-						$this->database->table('facebook_wallposts')->where('id', $rowPost->id)->update($post);
-					} else {
-						throw $e;
-					}
+			try {
+				$this->database->table('facebook_wallposts')->insert($post);
+			} catch (\PDOException $e) {
+				if ($e->getCode() == '23000') {
+					$this->database->table('facebook_wallposts')->where('id', $rowPost->id)->update($post);
+				} else {
+					throw $e;
 				}
 			}
+
+			$imported[$post['id']] = ArrayHash::from($rowPost);
 		}
 
-		return $data;
+		return $imported;
 	}
+
 }

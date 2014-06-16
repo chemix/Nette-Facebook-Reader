@@ -33,9 +33,20 @@ nette:
 		options: {lazy: yes}
 
 
+extensions:
+	facebook: Kdyby\Facebook\DI\FacebookExtension
+
+
+facebook:
+	# getting it from parameters is actually not neccesary
+	# you can put the variables directly in this section instead of the parameters
+	# in your config.local.neon
+	appId: 123
+	appSecret: "The cake is a lie"
+
+
 services:
 	- App\Model\UserManager
 	- App\RouterFactory
 	router: @App\RouterFactory::createRouter
 	- App\Model\FacebookWallposts
-	- App\Model\FacebookSessionManager(%facebook.appId%, %facebook.appSecret%)
