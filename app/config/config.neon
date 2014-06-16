@@ -5,6 +5,11 @@
 # http://nette.org/security-warning
 #
 parameters:
+	database:
+		host: 127.0.0.1
+		dbname: facebookwall_devel
+		user: facebookwall
+		password: mojetajneheslo
 
 
 php:
@@ -19,6 +24,13 @@ nette:
 
 	session:
 		expiration: 14 days
+
+
+	database:
+		dsn: 'mysql:host=%database.host%;dbname=%database.dbname%'
+		user: %database.user%
+		password: %database.password%
+		options: {lazy: yes}
 
 
 services:
