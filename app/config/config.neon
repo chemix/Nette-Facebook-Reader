@@ -5,6 +5,11 @@
 # http://nette.org/security-warning
 #
 parameters:
+	database:
+		host: 127.0.0.1
+		dbname: facebookwall_devel
+		user: facebookwall
+		password: mojetajneheslo
 
 
 php:
@@ -21,9 +26,27 @@ nette:
 		expiration: 14 days
 
 
+	database:
+		dsn: 'mysql:host=%database.host%;dbname=%database.dbname%'
+		user: %database.user%
+		password: %database.password%
+		options: {lazy: yes}
+
+
+extensions:
+	facebook: Kdyby\Facebook\DI\FacebookExtension
+
+
+facebook:
+	# getting it from parameters is actually not neccesary
+	# you can put the variables directly in this section instead of the parameters
+	# in your config.local.neon
+	appId: 123
+	appSecret: "The cake is a lie"
+
+
 services:
 	- App\Model\UserManager
 	- App\RouterFactory
 	router: @App\RouterFactory::createRouter
 	- App\Model\FacebookWallposts
-	- App\Model\FacebookSessionManager(%facebook.appId%, %facebook.appSecret%)

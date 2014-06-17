@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "36c32885ed8f79d9ff6c7617df459f8c",
+    "hash": "a9eb08878240e3201df3d1b11c97be2e",
     "packages": [
         {
             "name": "dg/adminer-custom",
@@ -26,53 +26,121 @@
             "time": "2014-06-11 07:56:43"
         },
         {
-            "name": "facebook/php-sdk-v4",
-            "version": "4.0.8",
+            "name": "kdyby/curl-ca-bundle",
+            "version": "v1.0.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/facebook/facebook-php-sdk-v4.git",
-                "reference": "4d77aa2fe57a3777040d6a60aa31fbe7465cb4ca"
+                "url": "https://github.com/Kdyby/CurlCaBundle.git",
+                "reference": "44557bb1141a437479d9dfbaf384d7734bb1c258"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/facebook/facebook-php-sdk-v4/zipball/4d77aa2fe57a3777040d6a60aa31fbe7465cb4ca",
-                "reference": "4d77aa2fe57a3777040d6a60aa31fbe7465cb4ca",
+                "url": "https://api.github.com/repos/Kdyby/CurlCaBundle/zipball/44557bb1141a437479d9dfbaf384d7734bb1c258",
+                "reference": "44557bb1141a437479d9dfbaf384d7734bb1c258",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.4.0"
-            },
-            "require-dev": {
-                "guzzlehttp/guzzle": "~4.0",
-                "mockery/mockery": "dev-master",
-                "phpunit/phpunit": "3.7.*"
-            },
-            "suggest": {
-                "guzzlehttp/guzzle": "Allows for implementation of the Guzzle HTTP client"
+                "ext-curl": "*"
             },
             "type": "library",
             "autoload": {
-                "psr-4": {
-                    "Facebook\\": "src/Facebook/"
-                }
+                "classmap": [
+                    "src/"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "Facebook Platform"
+                "BSD-3-Clause",
+                "GPL-2.0",
+                "GPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Filip Procházka",
+                    "email": "filip@prochazka.su",
+                    "homepage": "http://filip-prochazka.com"
+                }
+            ],
+            "description": "This package provides root certificates for usage in api clients on systems that have missing or outdated certificates.",
+            "homepage": "http://kdyby.org",
+            "keywords": [
+                "bundle",
+                "ca",
+                "certificate",
+                "curl",
+                "https",
+                "ssl"
+            ],
+            "time": "2014-05-08 13:23:25"
+        },
+        {
+            "name": "kdyby/facebook",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Kdyby/Facebook.git",
+                "reference": "7fd9495e130311de8da7399407546764b39763a1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Kdyby/Facebook/zipball/7fd9495e130311de8da7399407546764b39763a1",
+                "reference": "7fd9495e130311de8da7399407546764b39763a1",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "kdyby/curl-ca-bundle": "~1.0",
+                "nette/application": "~2.2@dev",
+                "nette/di": "~2.2@dev",
+                "nette/http": "~2.2@dev"
+            },
+            "require-dev": {
+                "jakub-onderka/php-parallel-lint": "~0.6",
+                "nette/bootstrap": "~2.2@dev",
+                "nette/neon": "~2.2@dev",
+                "nette/nette": "~2.2@dev",
+                "nette/tester": "@dev"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.2-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Kdyby\\Facebook\\": "src/"
+                },
+                "classmap": [
+                    "src/Kdyby/Facebook/exceptions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause",
+                "GPL-2.0",
+                "GPL-3.0"
             ],
             "authors": [
                 {
                     "name": "Facebook",
-                    "homepage": "https://github.com/facebook/facebook-php-sdk-v4/contributors"
+                    "homepage": "https://github.com/facebook/facebook-php-sdk/contributors"
+                },
+                {
+                    "name": "Filip Procházka",
+                    "email": "filip@prochazka.su",
+                    "homepage": "http://filip-prochazka.com"
                 }
             ],
-            "description": "Facebook SDK for PHP",
-            "homepage": "https://github.com/facebook/facebook-php-sdk-v4",
+            "description": "Facebook PHP SDK with authorization for Nette Framework",
+            "homepage": "http://kdyby.org",
             "keywords": [
                 "facebook",
+                "nette",
                 "sdk"
             ],
-            "time": "2014-06-10 20:42:16"
+            "time": "2014-06-14 12:50:15"
         },
         {
             "name": "latte/latte",
@@ -1209,17 +1277,13 @@
             "time": "2014-06-11 15:50:33"
         }
     ],
-    "aliases": [
-
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [
-
-    ],
+    "stability-flags": {
+        "kdyby/facebook": 20
+    },
     "platform": {
         "php": ">= 5.3.7"
     },
-    "platform-dev": [
-
-    ]
+    "platform-dev": []
 }
