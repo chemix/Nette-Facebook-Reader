@@ -27,20 +27,23 @@
         },
         {
             "name": "kdyby/curl-ca-bundle",
-            "version": "v1.0.2",
+            "version": "v1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Kdyby/CurlCaBundle.git",
-                "reference": "44557bb1141a437479d9dfbaf384d7734bb1c258"
+                "reference": "40a2b20cbe9b07eef81bf025f42ea205afd9a0a5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Kdyby/CurlCaBundle/zipball/44557bb1141a437479d9dfbaf384d7734bb1c258",
-                "reference": "44557bb1141a437479d9dfbaf384d7734bb1c258",
+                "url": "https://api.github.com/repos/Kdyby/CurlCaBundle/zipball/40a2b20cbe9b07eef81bf025f42ea205afd9a0a5",
+                "reference": "40a2b20cbe9b07eef81bf025f42ea205afd9a0a5",
                 "shasum": ""
             },
             "require": {
                 "ext-curl": "*"
+            },
+            "require-dev": {
+                "jakub-onderka/php-parallel-lint": "~0.6"
             },
             "type": "library",
             "autoload": {
@@ -71,7 +74,7 @@
                 "https",
                 "ssl"
             ],
-            "time": "2014-05-08 13:23:25"
+            "time": "2014-06-16 21:59:46"
         },
         {
             "name": "kdyby/facebook",
@@ -1277,7 +1280,9 @@
             "time": "2014-06-11 15:50:33"
         }
     ],
-    "aliases": [],
+    "aliases": [
+
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "kdyby/facebook": 20
@@ -1285,5 +1290,7 @@
     "platform": {
         "php": ">= 5.3.7"
     },
-    "platform-dev": []
+    "platform-dev": [
+
+    ]
 }
