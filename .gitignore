@@ -10,3 +10,4 @@ vendor/*
 app/config/config.local.neon
 
 .idea/*
+*.sublime-*
