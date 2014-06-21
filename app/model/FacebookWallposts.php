@@ -46,6 +46,13 @@ class FacebookWallposts extends Object
 			->fetchAll();
 	}
 
+	public function getAllPosts()
+	{
+		return $this->database->table('facebook_wallposts')
+			->order('created_time DESC')
+			->fetchAll();
+	}
+
 	public function importPostFromFacebook()
 	{
 		try {

@@ -1,0 +1,43 @@
+{block content}
+
+<div class="row">
+	<div class="column">
+
+		{foreach $wallPosts as $post}
+			<div class="row">
+			<div class="large-2 columns small-3">
+				{ifset $post->picture}
+				<img src="{$post->picture}">
+				{/ifset}
+			</div>
+			<div class="large-10 columns">
+
+					{ifset $post->name}
+						<h3>{$post->name}</h3>
+					{/ifset}
+
+					{ifset $post->message}
+						<p>{$post->message} </p>
+					{/ifset}
+
+
+				<ul class="inline-list">
+					<li><strong>{$post->type}</strong></li>
+					{ifset $post->link}
+					<li><a href="{$post->link}">{$post->link}</a></li>
+				{/ifset}
+					<li><small>{$post->id}</small></li>
+					<li><small>{$post->created_time}</small></li>
+					{if $post->status == '1'}
+						<li><a href="#" class="button alert">disable</a></li>
+					{else}
+						<li><a href="#" class="button">enable</a></li>
+					{/if}
+				</ul>
+			</div>
+		</div>
+		<hr>
+		{/foreach}
+	</div>
+
+</div>
