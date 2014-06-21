@@ -4,37 +4,39 @@
 
 {block #content}
 
-	{foreach $wallPosts as $post}
-    	type: <strong>{$post->type}</strong> <br>
-    	<small>
-    		id: {$post->id}<br>
-    		created_time: {$post->created_time} <br>
-        	updated_time: {$post->updated_time} <br>
-    	</small>
+<div class="row">
+	<div class="column">
 
-    	{ifset $post->name}
-    		name: <h1>{$post->name}</h1>
-    	{/ifset}
+		{foreach $wallPosts as $post}
+			<div class="row">
+            	<div class="large-2 columns small-3">
+            		{ifset $post->picture}
+            		<img src="{$post->picture}">
+            		{/ifset}
+            	</div>
+            	<div class="large-10 columns">
 
-    	{ifset $post->status_type}
-    		status_type: {$post->status_type} <br>
-    	{/ifset}
+					{ifset $post->name}
+						<h3>{$post->name}</h3>
+					{/ifset}
 
-    	{ifset $post->message}
-    		message: {$post->message} <br>
-    	{/ifset}
+					{ifset $post->message}
+						<p>{$post->message} </p>
+					{/ifset}
 
-    	{ifset $post->picture}
-    		piscture: {$post->picture} <br>
-    		<img src="{$post->picture}" />
-    	{/ifset}
 
-    	{ifset $post->link}
-    		link: <a href="{$post->link}">{$post->link}</a> <br>
-    	{/ifset}
+            		<ul class="inline-list">
+            			<li><strong>{$post->type}</strong></li>
+            			{ifset $post->link}
+                        	<li><a href="{$post->link}">{$post->link}</a></li>
+                        {/ifset}
+            			<li><small>{$post->id}</small></li>
+            			<li><small>{$post->created_time}</small></li>
+            		</ul>
+            	</div>
+            </div>
+            <hr>
+		{/foreach}
+	</div>
 
-    	{ifset $post->caption}
-    		caption: {$post->caption} <br>
-    	{/ifset}
-    	<hr>
-    {/foreach}
+</div>

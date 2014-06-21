@@ -14,4 +14,5 @@ TODO
 - [x] save to database
 - [x] show specific posts
 - [x] refactoring - use model and DI
-- [ ] use Kdyby\Facebook
+- [x] use Kdyby\Facebook
+- [ ] admin 
