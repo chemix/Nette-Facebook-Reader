@@ -15,7 +15,6 @@ use Nette\Utils\DateTime;
 use Tracy\Debugger;
 
 
-
 class FacebookWallposts extends Object
 {
 
@@ -28,7 +27,6 @@ class FacebookWallposts extends Object
 	 * @var Facebook
 	 */
 	protected $facebook;
-
 
 
 	public function __construct(Context $database, Facebook $facebook)
@@ -53,6 +51,37 @@ class FacebookWallposts extends Object
 			->fetchAll();
 	}
 
+	/**
+	 * enable post
+	 *
+	 * @param $postId string
+	 * @return bool
+	 */
+	public function enablePost($postId)
+	{
+		$this->database->table('facebook_wallposts')
+			->where('id', $postId)
+			->update(array('status' => '1'));
+
+		return TRUE;
+	}
+
+	/**
+	 * disable post
+	 *
+	 * @param $postId string
+	 * @return bool
+	 */
+	public function disablePost($postId)
+	{
+		$this->database->table('facebook_wallposts')
+			->where('id', $postId)
+			->update(array('status' => '0'));
+
+		return TRUE;
+
+	}
+
 	public function importPostFromFacebook()
 	{
 		try {
@@ -61,6 +90,7 @@ class FacebookWallposts extends Object
 
 		} catch (FacebookApiException $ex) {
 			Debugger::log($ex->getMessage(), 'facebook');
+
 			return array();
 		}
 
