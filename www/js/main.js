@@ -6,7 +6,6 @@
 			itemSelector: '.brick',
 			columnWidth: 320
 		});
-		console.log('ping');
 	});
 
 })(jQuery);
