@@ -41,3 +41,12 @@ form .error {
 html.js .jshidden {
 	display: none;
 }
+
+.brick {
+	width: 300px;
+	margin: 10px;
+	float: left;
+}
+.brick-container {
+	width: 0 auto;
+}

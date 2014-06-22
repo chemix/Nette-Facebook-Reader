@@ -2,15 +2,17 @@
 
 <div n:if="$wallPosts" class="row facebook-posts">
 
-	<div n:foreach="$wallPosts as $post" class="large-4 small-6 columns {$post->type}">
-		<div class="panel">
-			<img n:if="$post->picture" src="{$post->picture}" />
+	<div id="wall" class="brick-container column">
+		<div n:foreach="$wallPosts as $post" class="brick {$post->type}">
+			<div class="panel">
+				<img n:if="$post->picture" src="{$post->picture}" />
 
-			<h4 n:if="$post->name">{$post->name}</h4>
-			<p>
-				{if $post->message}{$post->message|truncate:250:'...'}{/if}
-				<a href="{$post|fbPostLink}">více</a>
-			</p>
+				<h4 n:if="$post->name">{$post->name}</h4>
+				<p>
+					{if $post->message}{$post->message|truncate:250:'...'}{/if}
+					<a href="{$post|fbPostLink}">více</a>
+				</p>
+			</div>
 		</div>
 	</div>
 </div>
