@@ -24,18 +24,31 @@ class AdminPresenter extends BasePresenter
 
 	public function actionEnablePost($postId)
 	{
-		if ($this->wallposts->enablePost($postId)){
-			$this->flashMessage('Post enabled');
+		if ($this->wallposts->enablePost($postId)) {
+			if ($this->isAjax()) {
+				$this->payload->message = 'Post enabled';
+				$this->sendPayload();
+
+			} else {
+				$this->flashMessage('Post enabled');
+				$this->redirect('default');
+			}
 		}
-		$this->redirect('default');
+
 	}
 
 	public function actionDisablePost($postId)
 	{
-		if ($this->wallposts->disablePost($postId)){
-			$this->flashMessage('Post disabled');
+		if ($this->wallposts->disablePost($postId)) {
+			if ($this->isAjax()) {
+				$this->payload->message = 'Post disabled';
+				$this->sendPayload();
+
+			} else {
+				$this->flashMessage('Post disabled');
+				$this->redirect('default');
+			}
 		}
-		$this->redirect('default');
 	}
 
 }

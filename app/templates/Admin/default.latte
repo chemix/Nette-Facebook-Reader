@@ -28,11 +28,10 @@
 				{/ifset}
 					<li><small>{$post->id}</small></li>
 					<li><small>{$post->created_time}</small></li>
-					{if $post->status == '1'}
-						<li><a n:href="Admin:disablePost $post->id" class="button alert">disable</a></li>
-					{else}
-						<li><a n:href="Admin:enablePost $post->id" class="button">enable</a></li>
-					{/if}
+
+					<li n:class="disable, !$post->status ? hide"><a n:href="Admin:disablePost $post->id" class="ajax button alert">disable</a></li>
+					<li n:class="enable, $post->status ? hide"><a n:href="Admin:enablePost $post->id" class="ajax button">enable</a></li>
+
 				</ul>
 			</div>
 		</div>

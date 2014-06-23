@@ -50,3 +50,7 @@ html.js .jshidden {
 .brick-container {
 	width: 0 auto;
 }
+
+.hide {
+	display: none !important;
+}
