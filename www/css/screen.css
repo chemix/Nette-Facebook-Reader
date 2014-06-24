@@ -13,7 +13,87 @@ div.flash {
 	border: 1px solid #E2C822;
 	padding: 1em;
 	margin: 1em 0;
+
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 10;
 }
+
+/* use autoprefixer
+https://github.com/ai/autoprefixer
+http://jsfiddle.net/simevidas/udyTs/show/light/
+
+
+div.flash{
+	animation:fadeOut 4s;
+	animation-fill-mode: forwards;
+}
+
+@keyframes fadeOut {
+	0% {
+		transform: scale(1);
+		opacity: 1;
+	}
+	70% {
+		transform: scale(1);
+		opacity: 1;
+	}
+	100% {
+		transform: scale(2);
+		opacity: 0;
+		display:none;
+	}
+}
+*/
+
+div.flash{
+	-webkit-animation:fadeOut 4s;
+	animation:fadeOut 4s;
+	-webkit-animation-fill-mode:forwards;
+	animation-fill-mode: forwards;
+	pointer-events: none;
+}
+
+@-webkit-keyframes fadeOut {
+	0% {
+		-webkit-transform:scale(1);
+		transform: scale(1);
+		opacity: 1;
+	}
+	70% {
+		-webkit-transform:scale(1);
+		transform: scale(1);
+		opacity: 1;
+	}
+	100% {
+		-webkit-transform:scale(2);
+		transform: scale(2);
+		opacity: 0;
+		display:none;
+	}
+}
+
+@keyframes fadeOut {
+	0% {
+		-webkit-transform:scale(1);
+		transform: scale(1);
+		opacity: 1;
+	}
+	70% {
+		-webkit-transform:scale(1);
+		transform: scale(1);
+		opacity: 1;
+	}
+	100% {
+		-webkit-transform:scale(2);
+		transform: scale(2);
+		opacity: 0;
+		display:none;
+	}
+}
+
+/* end autoprefixer */
 
 a[href^="#error:"] {
 	background: red;
