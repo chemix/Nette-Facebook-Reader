@@ -27,6 +27,8 @@ class AdminPresenter extends BasePresenter
 		if ($this->wallposts->enablePost($postId)) {
 			if ($this->isAjax()) {
 				$this->payload->message = 'Post enabled';
+				$this->payload->action = 'enable';
+				$this->payload->status = '1';
 				$this->sendPayload();
 
 			} else {
@@ -42,6 +44,8 @@ class AdminPresenter extends BasePresenter
 		if ($this->wallposts->disablePost($postId)) {
 			if ($this->isAjax()) {
 				$this->payload->message = 'Post disabled';
+				$this->payload->action = 'disable';
+				$this->payload->status = '1';
 				$this->sendPayload();
 
 			} else {
