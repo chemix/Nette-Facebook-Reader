@@ -28,6 +28,10 @@ class AdminPresenter extends BasePresenter
 			$this->flashMessage('Post enabled');
 			$this->redrawControl('flashes');
 			$this->redrawControl('wallposts');
+			// F5 protection without JS
+			if (!$this->isAjax()){
+				$this->redirect('this');
+			}
 		}
 
 	}
@@ -38,6 +42,10 @@ class AdminPresenter extends BasePresenter
 			$this->flashMessage('Post disabled');
 			$this->redrawControl('flashes');
 			$this->redrawControl('wallposts');
+			// F5 protection
+			if (!$this->isAjax()){
+				$this->redirect('this');
+			}
 		}
 	}
 
