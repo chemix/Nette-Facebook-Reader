@@ -44,6 +44,13 @@ class FacebookWallposts extends Object
 			->fetchAll();
 	}
 
+	public function getOne($id)
+	{
+		return $this->database->table('facebook_wallposts')
+			->where('id', $id)
+			->fetch();
+	}
+
 	public function getAllPosts()
 	{
 		return $this->database->table('facebook_wallposts')
