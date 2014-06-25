@@ -24,41 +24,33 @@ class AdminPresenter extends BasePresenter
 		}
 	}
 
-	public function handleEnablePost($postId)
+	protected function afterTogglePostStatus($status, $postId, $message)
 	{
-		if ($this->wallposts->enablePost($postId)) {
-
+		if ($status) {
 			$this->template->wallPosts = $this->isAjax()
 				? array($this->wallposts->getOne($postId))
 				: $this->wallposts->getAllPosts();
 
-			$this->flashMessage('Post enabled');
+			$this->flashMessage($message);
 			$this->redrawControl('flashes');
 			$this->redrawControl('wallposts');
-			// F5 protection without JS
-			if (!$this->isAjax()){
-				$this->redirect('this');
-			}
 		}
+		// F5 protection without JS
+		if (!$this->isAjax()){
+			$this->redirect('this');
+		}
+	}
 
+	public function handleEnablePost($postId)
+	{
+		$status = $this->wallposts->enablePost($postId);
+		$this->afterTogglePostStatus($status, $postId, 'Post enabled');
 	}
 
 	public function handleDisablePost($postId)
 	{
-		if ($this->wallposts->disablePost($postId)) {
-
-			$this->template->wallPosts = $this->isAjax()
-				? array($this->wallposts->getOne($postId))
-				: $this->wallposts->getAllPosts();
-
-			$this->flashMessage('Post disabled');
-			$this->redrawControl('flashes');
-			$this->redrawControl('wallposts');
-			// F5 protection
-			if (!$this->isAjax()){
-				$this->redirect('this');
-			}
-		}
+		$status = $this->wallposts->disablePost($postId);
+		$this->afterTogglePostStatus($status, $postId, 'Post disabled');
 	}
 
 }
