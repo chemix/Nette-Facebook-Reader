@@ -19,12 +19,19 @@ class AdminPresenter extends BasePresenter
 
 	public function renderDefault()
 	{
-		$this->template->wallPosts = $this->wallposts->getAllPosts();
+		if (!isset($this->template->wallPosts)) {
+			$this->template->wallPosts = $this->wallposts->getAllPosts();
+		}
 	}
 
 	public function handleEnablePost($postId)
 	{
 		if ($this->wallposts->enablePost($postId)) {
+
+			$this->template->wallPosts = $this->isAjax()
+				? array($this->wallposts->getOne($postId))
+				: $this->wallposts->getAllPosts();
+
 			$this->flashMessage('Post enabled');
 			$this->redrawControl('flashes');
 			$this->redrawControl('wallposts');
@@ -39,6 +46,11 @@ class AdminPresenter extends BasePresenter
 	public function handleDisablePost($postId)
 	{
 		if ($this->wallposts->disablePost($postId)) {
+
+			$this->template->wallPosts = $this->isAjax()
+				? array($this->wallposts->getOne($postId))
+				: $this->wallposts->getAllPosts();
+
 			$this->flashMessage('Post disabled');
 			$this->redrawControl('flashes');
 			$this->redrawControl('wallposts');

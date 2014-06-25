@@ -5,7 +5,7 @@
 
 		{snippet wallposts}
 			{foreach $wallPosts as $post}
-				<div class="row">
+				<div class="row" n:snippet="item-$post->id">
 				<div class="large-2 columns small-3">
 					{if $post->picture}
 					<img src="{$post->picture}">
