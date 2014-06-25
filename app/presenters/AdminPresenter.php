@@ -22,7 +22,7 @@ class AdminPresenter extends BasePresenter
 		$this->template->wallPosts = $this->wallposts->getAllPosts();
 	}
 
-	public function actionEnablePost($postId)
+	public function handleEnablePost($postId)
 	{
 		if ($this->wallposts->enablePost($postId)) {
 			if ($this->isAjax()) {
@@ -39,7 +39,7 @@ class AdminPresenter extends BasePresenter
 
 	}
 
-	public function actionDisablePost($postId)
+	public function handleDisablePost($postId)
 	{
 		if ($this->wallposts->disablePost($postId)) {
 			if ($this->isAjax()) {
