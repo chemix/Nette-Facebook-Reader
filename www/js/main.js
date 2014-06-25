@@ -10,8 +10,6 @@
 
 	var flashMessage = function(message)
 	{
-		console.log(message)
-		console.log($('body')[0])
 		$($('body')[0]).prepend($('<div class="flash info">'+message+'</div>'));
 	}
 
