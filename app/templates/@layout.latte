@@ -20,8 +20,9 @@
 <body>
 	<script> document.documentElement.className+=' js' </script>
 
-	<div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>
-
+	{snippet flashes}
+		<div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>
+	{/snippet}
 
 	<div class="row">
 		<div class="column">
@@ -64,6 +65,7 @@
 	<script src="{$basePath}/js/jquery.js"></script>
 	<script src="{$basePath}/js/masonry.pkgd.min.js"></script>
 	<script src="{$basePath}/js/netteForms.js"></script>
+	<script src="{$basePath}/js/nette.ajax.js"></script>
 	<script src="{$basePath}/js/main.js"></script>
 	{/block}
 </body>

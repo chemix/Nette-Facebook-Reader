@@ -3,40 +3,42 @@
 <div class="row">
 	<div class="column">
 
-		{foreach $wallPosts as $post}
-			<div class="row">
-			<div class="large-2 columns small-3">
-				{if $post->picture}
-				<img src="{$post->picture}">
-				{/if}
+		{snippet wallposts}
+			{foreach $wallPosts as $post}
+				<div class="row">
+				<div class="large-2 columns small-3">
+					{if $post->picture}
+					<img src="{$post->picture}">
+					{/if}
+				</div>
+				<div class="large-10 columns">
+
+						{ifset $post->name}
+							<h3>{$post->name}</h3>
+						{/ifset}
+
+						{ifset $post->message}
+							<p>{$post->message} </p>
+						{/ifset}
+
+
+					<ul class="inline-list">
+						<li><strong>{$post->type}</strong></li>
+						{ifset $post->link}
+							<li><a href="{$post->link}">{$post->link}</a></li>
+						{/ifset}
+						<li><small>{$post->id}</small></li>
+						<li><small>{$post->created_time}</small></li>
+
+						<li n:if="$post->status"><a n:href="disablePost! $post->id" class="ajax button alert">disable</a></li>
+						<li n:if="!$post->status"><a n:href="enablePost! $post->id" class="ajax button">enable</a></li>
+
+					</ul>
+				</div>
 			</div>
-			<div class="large-10 columns">
-
-					{ifset $post->name}
-						<h3>{$post->name}</h3>
-					{/ifset}
-
-					{ifset $post->message}
-						<p>{$post->message} </p>
-					{/ifset}
-
-
-				<ul class="inline-list">
-					<li><strong>{$post->type}</strong></li>
-					{ifset $post->link}
-						<li><a href="{$post->link}">{$post->link}</a></li>
-					{/ifset}
-					<li><small>{$post->id}</small></li>
-					<li><small>{$post->created_time}</small></li>
-
-					<li n:class="disable, !$post->status ? hide"><a n:href="disablePost! $post->id" class="ajax button alert">disable</a></li>
-					<li n:class="enable, $post->status ? hide"><a n:href="enablePost! $post->id" class="ajax button">enable</a></li>
-
-				</ul>
-			</div>
-		</div>
-		<hr>
-		{/foreach}
+			<hr>
+			{/foreach}
+		{/snippet}
 	</div>
 
 </div>

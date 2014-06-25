@@ -25,16 +25,9 @@ class AdminPresenter extends BasePresenter
 	public function handleEnablePost($postId)
 	{
 		if ($this->wallposts->enablePost($postId)) {
-			if ($this->isAjax()) {
-				$this->payload->message = 'Post enabled';
-				$this->payload->action = 'enable';
-				$this->payload->status = '1';
-				$this->sendPayload();
-
-			} else {
-				$this->flashMessage('Post enabled');
-				$this->redirect('default');
-			}
+			$this->flashMessage('Post enabled');
+			$this->redrawControl('flashes');
+			$this->redrawControl('wallposts');
 		}
 
 	}
@@ -42,16 +35,9 @@ class AdminPresenter extends BasePresenter
 	public function handleDisablePost($postId)
 	{
 		if ($this->wallposts->disablePost($postId)) {
-			if ($this->isAjax()) {
-				$this->payload->message = 'Post disabled';
-				$this->payload->action = 'disable';
-				$this->payload->status = '1';
-				$this->sendPayload();
-
-			} else {
-				$this->flashMessage('Post disabled');
-				$this->redirect('default');
-			}
+			$this->flashMessage('Post disabled');
+			$this->redrawControl('flashes');
+			$this->redrawControl('wallposts');
 		}
 	}
 
