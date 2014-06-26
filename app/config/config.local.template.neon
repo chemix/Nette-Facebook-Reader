@@ -1,0 +1,10 @@
+parameters:
+	database:
+		dbname: facebookwall_devel
+		user: facebookwall
+		password: mojetajneheslo
+
+
+facebook:
+	appId: "123456789012345"
+	appSecret: "12345678901234567890123456789012"
