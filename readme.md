@@ -15,4 +15,4 @@ TODO
 - [x] show specific posts
 - [x] refactoring - use model and DI
 - [x] use Kdyby\Facebook
-- [ ] admin 
+- [x] admin
